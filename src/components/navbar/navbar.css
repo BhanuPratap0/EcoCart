@@ -61,15 +61,85 @@
     justify-content: center;
     font-size: 12px;
 }
-
+.searchContainer{
+    background-color: rgb(218, 218, 218);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 40;
+    top: 10;
+    left: 450px;
+    height: 400px;
+    overflow-y: scroll;
+    padding: 10px;
+    padding-top: 90px;
+}
+.searchItems{
+    background-color: white;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    height: 100%;
+    width: 400px;
+    margin: 10px;
+    padding: 20px;
+    
+}
+.searchImage{
+    margin-right: 50px;
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+}
+.searchItemText{
+    display: flex;
+    flex-direction: column;
+}
+.searchItemTitle{
+    font-weight: 500;
+}
 @media (max-width: 600px) {
     .searchbar{
-        width: 30px;
+        width: 100px;
     }
     .logo{
         font-weight: 300;
+        font-size: 20px;
+        width: 50px;
     }
     .topbarIconBadge {
         right: 45px;
+    }
+    .navbarItemText{
+        display: none;
+    }
+    .searchContainer{
+        background-color: rgb(218, 218, 218);
+        position: absolute;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        z-index: 40;
+        top: 10;
+        left: 23px;
+        height: 400px;
+        overflow-y: scroll;
+        padding: 10px;
+        padding-top: 90px;
+        margin-top: 10px;
+    }
+    .searchItems{
+        background-color: white;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        height: 100%;
+        width: 300px;
+        margin: 10px;
+        padding: 20px;
+        
     }
 }

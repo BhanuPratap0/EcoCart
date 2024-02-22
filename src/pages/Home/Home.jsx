@@ -9,35 +9,37 @@ import { motion, useInView } from "framer-motion";
 import "react-multi-carousel/lib/styles.css";
 import Footer from '../../components/footer/Footer'
 import { Link } from 'react-router-dom'
+import { allProductList } from '../../sampledata'
 
 const responsive = {
   desktop: {
-      breakpoint: { max: 3000, min: 1024 },
-      items: 4,
-      slidesToSlide: 4 // optional, default to 1.
+    breakpoint: { max: 3000, min: 1024 },
+    items: 4,
+    slidesToSlide: 4 // optional, default to 1.
   },
   tablet: {
-      breakpoint: { max: 1024, min: 464 },
-      items: 2,
-      slidesToSlide: 2 // optional, default to 1.
+    breakpoint: { max: 1024, min: 464 },
+    items: 2,
+    slidesToSlide: 2 // optional, default to 1.
   },
   mobile: {
-      breakpoint: { max: 464, min: 0 },
-      items: 1,
-      slidesToSlide: 1 // optional, default to 1.
+    breakpoint: { max: 464, min: 0 },
+    items: 1,
+    slidesToSlide: 1 // optional, default to 1.
   }
 };
 
 
 const Home = () => {
   
+
   const categorySection = useRef();
   const bestProductSection = useRef();
   const bestProductSection2 = useRef();
   const isCategorySectionInView = useInView(categorySection, { once: true, margin: "-100px" })
   const isbestProductSectionInView = useInView(bestProductSection, { once: true, margin: "-100px" })
   const isbestProductSectionInView2 = useInView(bestProductSection2, { once: true, margin: "-100px" })
-  
+
   return (
     <motion.div
       initial={{ y: 100 }}
@@ -47,7 +49,7 @@ const Home = () => {
       }}
     >
       <div>
-        <div  id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>

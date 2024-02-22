@@ -6,6 +6,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import HomeIcon from '@mui/icons-material/Home';
 import PersonIcon from '@mui/icons-material/Person';
 import cartContext from '../../context/cartContext';
+import { allProductList } from '../../sampledata';
 
 const Navbar = () => {
   const [search, setSearch] = useState(null);
@@ -14,6 +15,25 @@ const Navbar = () => {
   useEffect(() => {
     ref.current?.scrollIntoView({ behavior: 'smooth' });
   })
+  const [query, setQuery] = useState('');
+  const [results, setResults] = useState([]);
+
+  const handleSearch = (e) => {
+    if (!e.target.value === '') {
+      setResults([]);
+    }
+    const value = e.target.value;
+    setQuery(value);
+    if (value.trim() === '') {
+      setResults([]);
+    } else {
+      const searchResults = allProductList.filter((item) =>
+        item.title.toLowerCase().includes(value.toLowerCase())
+      );
+      console.log(searchResults);
+      setResults(searchResults);
+    }
+  };
   return (
     <>
       <div ref={ref} className="navbar">
@@ -25,7 +45,7 @@ const Navbar = () => {
         <div className="navbarCenter">
           <div className="searchbar">
             <Search className="searchIcon" />
-            <input id="searchFriends" onChange={(e) => setSearch(e.target.value)} placeholder="Search for product" className="searchInput" />
+            <input id="searchFriends" onChange={handleSearch} placeholder="Search for product" className="searchInput" />
           </div>
         </div>
         <div className="navbarRight">
@@ -33,20 +53,34 @@ const Navbar = () => {
             <div className="iconItem">
               <Link to={'/'} style={{ color: 'black' }}>
                 <HomeIcon />
-                <span>Home</span>
+                <span className='navbarItemText'>Home</span>
               </Link>
             </div>
             <div className="iconItem">
               <Link to={'/cartPage'} style={{ color: 'black' }}>
                 <ShoppingCartIcon />
                 <span className="topbarIconBadge">{cart.length}</span>
-                <span>Cart</span>
+                <span className='navbarItemText'>Cart</span>
               </Link>
             </div>
 
           </div>
         </div>
       </div>
+      {results.length !== 0 && <div className="searchContainer">
+        {results.map((item) => (
+          <Link to={`productDetail/${item.title}`} style={{ color: 'black' }}>
+            <div className='searchItems'>
+              <img className='searchImage' src={item.images[0]} />
+              <div className='searchItemText'>
+                <span className='searchItemTitle'>{item.title}</span>
+                <span>{item.price}</span>
+              </div>
+            </div>
+          </Link>
+        ))}
+
+      </div>}
     </>
   )
 }

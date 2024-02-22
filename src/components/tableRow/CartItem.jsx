@@ -27,6 +27,7 @@ const CartItem = ({ item }) => {
         const newCart = cart.filter(i=> i.name !== item.name);
         setCart(cart.filter(i=> i.name !== item.name));
         localStorage.setItem("cart", JSON.stringify(newCart));
+        setCart(JSON.parse(localStorage.getItem("cart")));
     }
 
     return (
@@ -34,7 +35,7 @@ const CartItem = ({ item }) => {
             <div className="cartItemContainer">
                 <div className="cartItem">
                     <div className="cartItemImage">
-                        <img src={require(`../../images/${item.img}`)} />
+                        <img src={item.img} />
                         <div className="addRemoveButtons">
                             <button disabled={quantityCount===0} className='addRemoveBuutton' onClick={handleMinus}>-</button>
                             <span className='cartItemQuantity'>{quantityCount}</span>
@@ -42,8 +43,8 @@ const CartItem = ({ item }) => {
                         </div>
                     </div>
                     <div className="cartItemDetail">
-                        <span className='cartItemName'>SJCAM SJ8 Dual Touch Screen 2.33'/1.3' 140.5° Wide-Angle Super Night Vision</span>
-                        <span className="cartItemPrice">{item.price}</span>
+                        <span className='cartItemName'>{item.name}</span>
+                        <span className="cartItemPrice">₹{item.price}</span>
                         <span onClick ={handleRemove} className="removeItem">Remove</span>
                     </div>
                 </div>

@@ -37,3 +37,23 @@
     width: 23%;
     margin-right: 10px;
 }
+.prevNextButtons{
+    margin: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.prevNextButtons button{
+    border: none;
+    background-color: white;
+}
+.filterButton{
+    border: none;
+    border-bottom: 0.5px solid gray;
+    background-color: white;
+    box-shadow: 3px 2px 0px black;
+}
+.filterButton:hover{
+    box-shadow: none;
+    transition: 0.3s all ease-in-out;
+}

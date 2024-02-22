@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './productDetail.css'
 import LocalOfferIcon from '@mui/icons-material/LocalOffer';
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
@@ -6,8 +6,9 @@ import FlashOnIcon from '@mui/icons-material/FlashOn';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { categoryList, productsList } from '../../data.js';
 import Carousel from 'react-multi-carousel';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import cartContext from '../../context/cartContext.js';
+import { allProductList } from '../../sampledata';
 
 
 const responsive = {
@@ -29,25 +30,36 @@ const responsive = {
 };
 
 const ProductDetail = () => {
+    
+    const ref = useRef();
+    useEffect(() => {
+      ref.current?.scrollIntoView({ behavior: 'smooth' });
+    })
+
     const { cart, setCart } = useContext(cartContext);
     const productName = useParams().productName;
-    const found = productsList.find(obj => {
-        return obj.name === productName;
+    console.log(productName)
+    const found = allProductList.find(obj => {
+        return obj.title === productName;
+    });
+    const similarProducts = allProductList.filter(obj => {
+        return obj.category===found.category
     });
 
     const object = {
-        img: found.img,
-        name: found.name,
+        img: found.images[0],
+        name: found.title,
         price: found.price,
         cost: found.cost,
         category: found.category,
         quantity: 1,
     }
     let newObject = [];
-    const test = () => {
+
+    const addToCart = () => {
         let ifPresent = cart.find((i) => i.name === object.name);
         if (ifPresent) {
-            newObject =cart.map((i) => (i.name === object.name ? { ...i, quantity: i.quantity + 1 } : i));
+            newObject = cart.map((i) => (i.name === object.name ? { ...i, quantity: i.quantity + 1 } : i));
         } else {
             newObject = [...cart, object];
         }
@@ -62,21 +74,42 @@ const ProductDetail = () => {
             }
         })
     }
+
+    let history = useNavigate();
+    const buyNow = () => {
+        let ifPresent = cart.find((i) => i.name === object.name);
+        if (ifPresent) {
+            newObject = cart.map((i) => (i.name === object.name ? { ...i, quantity: i.quantity + 1 } : i));
+        } else {
+            newObject = [...cart, object];
+        }
+        localStorage.setItem("cart", JSON.stringify(newObject));
+        setCart((prevItems) => {
+            const existingItem = prevItems.find((i) => i.name === object.name);
+
+            if (existingItem) {
+                return prevItems.map((i) => (i.name === object.name ? { ...i, quantity: i.quantity + 1 } : i))
+            } else {
+                return [...prevItems, object];
+            }
+        })
+        history('/cartPage')
+    }
     console.log(cart);
     return (
         <>
-            <div className="mainContainer">
+            <div ref={ref} className="mainContainer">
                 <div className="leftSide">
-                    <img src={require(`../../images/${found.img}`)} />
+                    <img className='productImage' src={found.images[0]} />
                     <div className="leftSideButtons">
-                        <button className='cart' onClick={test}> <ShoppingCartIcon fontSize='large' />ADD TO CART</button>
-                        <button className='buy'><FlashOnIcon fontSize='large' /> BUY NOW</button>
+                        <button className='cart' onClick={addToCart}> <ShoppingCartIcon fontSize='large' />ADD TO CART</button>
+                        <button onClick={buyNow} className='buy'><FlashOnIcon fontSize='large' /> BUY NOW</button>
                     </div>
                 </div>
                 <div className="rightSide">
-                    <div className="title">{found.name}</div>
+                    <div className="title">{found.title}</div>
                     <span className="ratingText">3.8★</span>
-                    <span className="priceText">{found.price}</span>
+                    <span className="priceText">₹{found.price}</span>
                     <span>Available offers</span>
                     <div className="offers">
                         <div className="tag">
@@ -91,7 +124,7 @@ const ProductDetail = () => {
                         </div>
                     </div>
                     <div className="desc">
-                        <span className='descHead'>Description</span>
+                        <span className='descHead'>{found.description}</span>
                         <br></br>
                         {found.desc}
                     </div>
@@ -108,11 +141,11 @@ const ProductDetail = () => {
                     <Carousel
                         responsive={responsive}
                     >
-                        {categoryList.map((item) => (
+                        {similarProducts.map((item) => (
                             <div className="popularItem">
-                                <img src={require(`../../images/${item.img}`)} />
-                                <span className='popularItemName'>{item.name}</span>
-                                <span className='popularItemPrice'>{item.link}</span>
+                                <img src={item.images[0]} />
+                                <span className='popularItemName'>{item.title}</span>
+                                <span className='popularItemPrice'>₹{item.price}</span>
                             </div>
                         )
                         )}

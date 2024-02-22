@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useEffect, useRef, useState } from 'react'
 import './navbar.css'
 import { Link } from 'react-router-dom'
 import { Search } from "@mui/icons-material"
@@ -9,10 +9,14 @@ import cartContext from '../../context/cartContext';
 
 const Navbar = () => {
   const [search, setSearch] = useState(null);
-  const {cart} = useContext(cartContext);
+  const { cart } = useContext(cartContext);
+  const ref = useRef();
+  useEffect(() => {
+    ref.current?.scrollIntoView({ behavior: 'smooth' });
+  })
   return (
     <>
-      <div className="navbar">
+      <div ref={ref} className="navbar">
         <div className="navbarLeft">
           <Link to="/" style={{ textDecoration: "none" }} >
             <span className='logo' >EcoCart</span>

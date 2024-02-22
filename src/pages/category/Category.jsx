@@ -4,45 +4,88 @@ import Navbar from '../../components/navbar/Navbar'
 import { Link, useParams } from 'react-router-dom';
 import PorductCard from '../../components/product card/PorductCard';
 import { motion, useInView } from "framer-motion";
+import { allProductList } from '../../sampledata';
+import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
+
+
 const Category = () => {
+
+    const ref = useRef();
+    useEffect(() => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
+    })
+
+    const priceRef = useRef();
+    const brandRef = useRef();
+    const ratingRef = useRef();
     const product = useParams().product;
     const productSection = useRef();
     const isproductSectionInView = useInView(productSection, { once: true })
     const [productList, setProductList] = useState([]);
+    const pageSize = 8;
+    const [pageNumber, setPageNumber] = useState(1);
+    const [page, setPage] = useState([]);
+
+
+    function paginateArray(array, pageSize, pageNumber) {
+        --pageNumber;
+        return array.slice(pageNumber * pageSize, (pageNumber + 1) * pageSize);
+    }
     useEffect(() => {
-        const fetchProducts = async () => {
-            let data = await fetch(`https://dummyjson.com/products/category/${product}`);
-            let parsedData = await data.json();
-            console.log(parsedData.products)
-            setProductList(parsedData.products);
+        if (product !== 'all') {
+            setProductList(allProductList.filter(item => item.category === product))
+        } else {
+            setProductList(allProductList);
         }
-        fetchProducts();
-        fetch("https://fakestoreapi.com/products")
-            .then((res) => res.json())
-            .then((json) => console.log(json));
+        setPage(paginateArray(productList, pageSize, pageNumber));
     }, [])
+
+    useEffect(() => {
+        setPage(paginateArray(productList, pageSize, pageNumber));
+    }, [pageNumber, page, productList])
+
+    const handleFilters = (e) => {
+        e.preventDefault();
+        if (brandRef.current.value) {
+            setProductList(allProductList.filter(item => item.brand === brandRef.current.value))
+        }
+        if (ratingRef.current.value) {
+            setProductList(allProductList.filter(item => item.rating >= parseInt(ratingRef.current.value, 10)));
+        }
+        if (priceRef.current.value === 'aesc') {
+            const sortedItems = [...productList].sort((a, b) => a.price - b.price);
+            setProductList(sortedItems);
+        } else if (priceRef.current.value === 'desc') {
+            const sortedItems = [...productList].sort((a, b) => b.price - a.price);
+            setProductList(sortedItems);
+        }
+    }
+
+
     return (
-        <div className='containerCategory'>
+        <div ref={ref} className='containerCategory'>
             <div className="filters">
-                <form className='filterForm'>
-                    <select name="price" id="price">
-                        <option value="volvo">Price</option>
-                        <option value="volvo">Low to High</option>
-                        <option value="saab">High to Low</option>
+                <form className='filterForm' onSubmit={handleFilters}>
+                    <select ref={priceRef} name="price" id="price">
+                        <option value="">Price</option>
+                        <option value="aesc">Low to High</option>
+                        <option value="desc">High to Low</option>
                     </select>
-                    <select name="price" id="price">
-                        <option value="volvo">Rating</option>
-                        <option value="saab">4★ & above</option>
-                        <option value="opel">3★ & above</option>
-                        <option value="audi">2★ & above</option>
-                        <option value="audi">1★ & above</option>
+                    <select ref={ratingRef} name="rating" id="price">
+                        <option value="">Rating</option>
+                        <option value="4">4★ & above</option>
+                        <option value="3">3★ & above</option>
+                        <option value="2">2★ & above</option>
+                        <option value="1">1★ & above</option>
                     </select>
-                    <select name="price" id="price">
-                        <option value="volvo">Brands</option>
+                    <select ref={brandRef} name="brand" id="price">
+                        <option value="">Brands</option>
                         <option value="saab">₹1000-4000</option>
                         <option value="opel">₹4000-8000</option>
                         <option value="audi">₹8000-10000</option>
                     </select>
+                    <button className='filterButton' type='submit'>Filter</button>
                 </form>
             </div>
             <motion.div
@@ -53,17 +96,23 @@ const Category = () => {
                 }}
                 className="productSection" ref={productSection}>
 
-                {productList.map((item,index) => (
+                {page.map((item, index) => (
                     <motion.div
                         className='productCardDiv'
                         initial={{ opacity: 0 }}
                         animate={{ opacity: 1 }}
                         transition={{ delay: (index / 10) }}
                     >
-                        <PorductCard img={item.images[0]} title={item.title} desc={item.description} rating={item.rating} />
+                        <PorductCard price={item.price} img={item.images[0]} title={item.title} desc={item.description} rating={item.rating} />
                     </motion.div>
                 ))}
             </motion.div>
+            <div className="prevNextButtons">
+                <span>Prev Page &nbsp;</span>
+                <button disabled={pageNumber == 1} onClick={() => setPageNumber(prev => prev - 1)}><ArrowBackIosIcon /></button>
+                <button disabled={(pageNumber * 8) >= productList.length} onClick={() => setPageNumber(prev => prev + 1)}><ArrowForwardIosIcon /></button>
+                <span>&nbsp; Next Page</span>
+            </div>
         </div>
     )
 }

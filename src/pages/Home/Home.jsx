@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from '../../components/navbar/Navbar'
 import './home.css'
 import { categoryList } from '../../data'
@@ -30,12 +30,14 @@ const responsive = {
 
 
 const Home = () => {
+  
   const categorySection = useRef();
   const bestProductSection = useRef();
   const bestProductSection2 = useRef();
   const isCategorySectionInView = useInView(categorySection, { once: true, margin: "-100px" })
   const isbestProductSectionInView = useInView(bestProductSection, { once: true, margin: "-100px" })
   const isbestProductSectionInView2 = useInView(bestProductSection2, { once: true, margin: "-100px" })
+  
   return (
     <motion.div
       initial={{ y: 100 }}
@@ -45,7 +47,7 @@ const Home = () => {
       }}
     >
       <div>
-        <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+        <div  id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
           <div class="carousel-indicators">
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
             <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
@@ -85,7 +87,7 @@ const Home = () => {
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: (index/5) }}
+              transition={{ delay: (index / 5) }}
               className="categoryItem">
               <img src={require(`../../images/${item.img}`)} />
               <span>{item.name}</span>
@@ -109,47 +111,47 @@ const Home = () => {
         >
           <motion.div
             initial={{ opacity: 0 }}
-            animate={ isbestProductSectionInView ? {opacity: 1} : {} }
+            animate={isbestProductSectionInView ? { opacity: 1 } : {}}
             transition={{ delay: '0.5' }}
             className="popularItem">
-            <img src={require(`../../images/power.png`)} />
-            <span className='popularItemName'>Power Bank</span>
+            <Link to='productDetail/iPhone 9'><img src={`https://cdn.dummyjson.com/product-images/1/thumbnail.jpg`} /></Link>
+            <span className='popularItemName'>iPhone 9</span>
             <span className='popularItemPrice'>Shop Now!</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView ? { opacity: 1 } : {}}
             transition={{ delay: '1' }}
             className="popularItem">
-            <img src={require(`../../images/camera.png`)} />
-            <span className='popularItemName'>Camera</span>
+            <Link to='productDetail/Samsung Universe 9'><img src={`https://cdn.dummyjson.com/product-images/3/thumbnail.jpg`} /></Link>
+            <span className='popularItemName'>Samsung Universe 9</span>
             <span className='popularItemPrice'>Shop Now!</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView ? { opacity: 1 } : {}}
             transition={{ delay: '1.5' }}
             className="popularItem">
-            <img src={require(`../../images/monitor.png`)} />
-            <span className='popularItemName'>Monitors</span>
-            <span className='popularItemPrice'>From ₹20,000</span>
+            <Link to='productDetail/MacBook Pro'><img src={`https://cdn.dummyjson.com/product-images/6/thumbnail.png`} /></Link>
+            <span className='popularItemName'>MacBook Pro</span>
+            <span className='popularItemPrice'>From ₹59,999</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView ? { opacity: 1 } : {}}
             transition={{ delay: '2' }}
             className="popularItem">
-            <img src={require(`../../images/keyboard.jpg`)} />
-            <span className='popularItemName'>Keyboards</span>
+            <Link to='productDetail/HP Pavilion 15-DK1056WM'><img src={`https://cdn.dummyjson.com/product-images/10/thumbnail.jpeg`} /></Link>
+            <span className='popularItemName'>HP Pavilion 15-DK1056WM</span>
             <span className='popularItemPrice'>From ₹442</span>
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView ? { opacity: 1 } : {}}
             transition={{ delay: '2.5' }}
             className="popularItem">
-            <img src={require(`../../images/mouse.png`)} />
-            <span className='popularItemName'>Mouse</span>
+            <Link to='productDetail/Microsoft Surface Laptop 4'><img src={`https://cdn.dummyjson.com/product-images/8/thumbnail.jpg`} /></Link>
+            <span className='popularItemName'>Microsoft Surface Laptop 4</span>
             <span className='popularItemPrice'>From ₹149</span>
           </motion.div>
         </Carousel>
@@ -170,7 +172,7 @@ const Home = () => {
         >
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView2 ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView2 ? { opacity: 1 } : {}}
             transition={{ delay: '0.5' }}
             className="popularItem">
             <img src={require(`../../images/shopping-1.png`)} />
@@ -179,7 +181,7 @@ const Home = () => {
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView2 ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView2 ? { opacity: 1 } : {}}
             transition={{ delay: '1' }}
             className="popularItem">
             <img src={require(`../../images/shopping-2.png`)} />
@@ -188,7 +190,7 @@ const Home = () => {
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView2 ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView2 ? { opacity: 1 } : {}}
             transition={{ delay: '1.5' }}
             className="popularItem">
             <img src={require(`../../images/shopping-3.png`)} />
@@ -197,7 +199,7 @@ const Home = () => {
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView2 ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView2 ? { opacity: 1 } : {}}
             transition={{ delay: '2' }}
             className="popularItem">
             <img src={require(`../../images/shopping-4.png`)} />
@@ -206,7 +208,7 @@ const Home = () => {
           </motion.div>
           <motion.div
             initial={{ opacity: 0 }}
-            animate={isbestProductSectionInView2 ? {opacity: 1} : {}}
+            animate={isbestProductSectionInView2 ? { opacity: 1 } : {}}
             transition={{ delay: '2.5' }}
             className="popularItem">
             <img src={require(`../../images/shopping-5.png`)} />
@@ -218,7 +220,7 @@ const Home = () => {
 
       {/* EXPLORE ALL PRODUCTS */}
       <div className="explore">
-        <button class="button-56" role="button">Explore All Products</button>
+        <Link to={'/category/all'} ><button class="button-56" role="button">Explore All Products</button></Link>
       </div>
     </motion.div>
   )

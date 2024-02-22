@@ -11,9 +11,21 @@
     position: sticky;
     top: 0px;
     flex: 4;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 
+.productImage{
+    width: 70%;
+    height:70%;
+    object-fit: contain;
+    margin-bottom: 20px;
+}
 .rightSide {
+    width: 100%;
     flex: 8;
     display: flex;
     flex-direction: column;
@@ -75,6 +87,7 @@
     background-color: orange
 }
 .leftSideButtons{
+    width: 100%;
     gap: 10px;
     display: flex;
     justify-content: center;

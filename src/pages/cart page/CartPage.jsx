@@ -5,14 +5,12 @@ import { motion } from "framer-motion";
 
 const CartPage = () => {
     const [total, setTotal] = useState(0);
-    const [itemCount, setItemCount] = useState(0);
     const cart = JSON.parse(localStorage.getItem("cart"));
     useEffect(() => {
         const getTotal = () => {
             {
                 cart.map((item) => {
-                    setTotal(prev => prev + item.cost);
-                    setItemCount(prev => prev + 1);
+                    setTotal(prev => prev + item.price);
                 })
             }
         }
@@ -31,11 +29,12 @@ const CartPage = () => {
                     className="leftSide">
                     <div className="leftSideWrapper">
 
-                        {cart?.map((item,index) => (
+                        {cart?.map((item, index) => (
                             <motion.div
+                                className='cartItemDiv'
                                 initial={{ opacity: 0 }}
                                 animate={{ opacity: 1 }}
-                                transition={{ delay: ((index+1)/3) }}>
+                                transition={{ delay: ((index + 1) / 3) }}>
                                 <CartItem item={item} />
                             </motion.div>
                         ))}
@@ -55,7 +54,7 @@ const CartPage = () => {
                         <span className=''>PRICE DETAILS</span>
                     </div>
                     <div className="rightSideItem">
-                        <span>Price ({itemCount} items)</span>
+                        <span>Price ({cart.length} items)</span>
                         <span>₹{total}</span>
                     </div>
                     <div className="rightSideItem">

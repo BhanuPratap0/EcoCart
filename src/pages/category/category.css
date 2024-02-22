@@ -1,0 +1,39 @@
+
+.containerCategory{
+    background-color: white;
+    margin: 10px;
+    padding-top: 20px;
+    height: 100vh;
+    overflow-y: scroll;
+    scrollbar-width:thin;
+}
+
+.filterForm{
+    margin: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 100px;
+}
+.filterForm select{
+    padding: 10px;
+    border: none;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.397);
+    background-color: rgba(255, 255, 255, 0.516);
+}
+
+.filterForm option:hover{
+    background-color: #000 !important;
+}
+.productSection{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 20px;
+    padding-left: 40px;
+}
+.productCardDiv{
+    width: 23%;
+    margin-right: 10px;
+}

@@ -1,0 +1,45 @@
+.productCard {
+    background-color: white;
+    width: 100%;
+    height: 450px;
+    margin: 10px;
+    padding: 5px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+.productCardWrapper{
+    display: flex;
+    flex-direction: column;
+}
+.productCard:hover{
+    transition: all 0.4s ease-in-out;
+    box-shadow: 8px 1px 14px -9px rgba(0, 0, 0, 0.75);
+    cursor: pointer;
+}
+
+.productCardWrapper img {
+    height: 250px;
+    width: 100%;
+    object-fit: contain;
+}
+
+.productCardWrapper p {
+    font-weight: bold;
+    font-size: 13px;
+    color: rgba(128, 128, 128, 0.847);
+}
+
+.productCardWrapper .productTitle {
+    font-weight: 700;
+    font-size: 20px;
+}
+.rating{
+    background-color: green;
+    border-radius: 3px;
+    width: fit-content;
+    padding-left: 3px;
+    padding-right: 3px;
+    font-weight: bold;
+    font-size: 13px;
+}

@@ -1,0 +1,127 @@
+.mainContainer {
+    display: flex;
+    background-color: white;
+    padding: 10px;
+    margin: 0;
+    width: 100%;
+    height: calc(100vh-50px);
+}
+
+.leftSide {
+    position: sticky;
+    top: 0px;
+    flex: 4;
+}
+
+.rightSide {
+    flex: 8;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 50px;    
+    overflow-y: scroll;
+    scrollbar-width: none;  /* Firefox */
+    height: 80vh;
+}
+
+
+.title {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.priceText {
+    font-weight: bold;
+    font-size: 30px;
+}
+
+.descHead {
+    font-weight: bold;
+    color: gray;
+    font-size: 12px;
+}
+
+.offers {
+    display: flex;
+    justify-content: center;
+}
+
+.offersItems {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 7.5px;
+}
+
+.offerItem {
+    font-size: 12.5px;
+}
+
+.tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+.cart, .buy{
+    height: 50px;
+    width: 40%;
+    border: none;
+    background-color: yellowgreen;
+    font-weight: 600;
+}
+.buy{
+    background-color: orange
+}
+.leftSideButtons{
+    gap: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.similarProducts {
+    box-shadow: 8px 1px 14px -9px rgba(0, 0, 0, 0.75);
+    margin: 10px;
+    background: white;
+}
+
+
+.similarItems {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+
+
+.similarProductsHeading {
+    padding-top: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 30px;
+}
+
+.similarItem {
+    border: 0.5px solid rgba(128, 128, 128, 0.347);
+    margin: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: white;
+}
+
+.similarItem img {
+    width: 230px;
+    height: 230px;
+    object-fit: contain;
+}
+
+.similarItemPrice {
+    font-weight: 700;
+}

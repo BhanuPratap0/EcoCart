@@ -37,7 +37,7 @@ const CartItem = ({ item }) => {
                     <div className="cartItemImage">
                         <img src={item.img} />
                         <div className="addRemoveButtons">
-                            <button disabled={quantityCount===0} className='addRemoveBuutton' onClick={handleMinus}>-</button>
+                            <button disabled={quantityCount===1} className='addRemoveBuutton' onClick={handleMinus}>-</button>
                             <span className='cartItemQuantity'>{quantityCount}</span>
                             <button className='addRemoveBuutton'onClick={handleAdd}>+</button>
                         </div>

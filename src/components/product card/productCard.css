@@ -51,3 +51,10 @@
     font-weight: bold;
     font-size: 20px;
 }
+@media (max-width: 600px) {
+
+    .productCard {
+        border: 0.5px solid rgba(128, 128, 128, 0.42);
+    }
+
+}

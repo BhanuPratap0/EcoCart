@@ -51,11 +51,6 @@
     align-items: center;
     justify-content: center;
 }
-
-
-
-
-
 .popularProductsHeading {
     padding-top: 30px;
     display: flex;
@@ -146,8 +141,16 @@
   outline: 0;
 }
 
-@media (min-width: 768px) {
-  .button-56 {
-    padding: 0 40px;
+@media (max-width: 600px) {
+  .category{
+    width: 100%;
+    overflow: scroll;
+    padding-left: 90px;
+  }
+  .carousel{
+    margin-top: 40px !important;
+  }
+  .popularProducts{
+    width: 100%;
   }
 }

@@ -14,6 +14,7 @@
     align-items: center;
     justify-content: center;
     gap: 100px;
+    flex-wrap: wrap;
 }
 .filterForm select{
     padding: 10px;
@@ -56,4 +57,20 @@
 .filterButton:hover{
     box-shadow: none;
     transition: 0.3s all ease-in-out;
+}
+@media (max-width: 600px) {
+
+    .filterForm{
+        margin: 0;
+    }
+    .filterForm select{
+        width: 90px;
+    }
+    .productSection{
+        display: block
+    }
+    .productCardDiv{
+        width: 100%;
+        margin-left: -20px;
+    }
 }

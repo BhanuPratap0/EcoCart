@@ -1,10 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import './cartPage.css'
 import CartItem from '../../components/tableRow/CartItem';
-import { motion } from "framer-motion";
+import { easeInOut, motion } from "framer-motion";
+import { Link } from 'react-router-dom';
+import ProductionQuantityLimitsIcon from '@mui/icons-material/ProductionQuantityLimits';
 
 const CartPage = () => {
     const [total, setTotal] = useState(0);
+    const [orderPlaced, setOrderPlaced] = useState(false);
     const cart = JSON.parse(localStorage.getItem("cart"));
     useEffect(() => {
         const getTotal = () => {
@@ -17,9 +20,15 @@ const CartPage = () => {
         getTotal();
     }, [])
 
+    const handleOrderplaced = () => {
+        setOrderPlaced(!orderPlaced);
+        const emptyCart = [];
+        localStorage.setItem("cart", JSON.stringify(emptyCart));
+    }
+
     return (
         <>
-            <div className="cartContainer">
+            {!orderPlaced && <div className="cartContainer">
                 <motion.div
                     initial={{ x: -300 }}
                     animate={{ x: 0 }}
@@ -28,7 +37,6 @@ const CartPage = () => {
                     }}
                     className="leftSide">
                     <div className="leftSideWrapper">
-
                         {cart?.map((item, index) => (
                             <motion.div
                                 className='cartItemDiv'
@@ -38,9 +46,15 @@ const CartPage = () => {
                                 <CartItem item={item} />
                             </motion.div>
                         ))}
+                        {cart.length == 0 &&
+                            <div className='emptyCartDiv'>
+                                <ProductionQuantityLimitsIcon fontSize='large'/>
+                                Empty Cart! Buy Something to see Products Here!
+                            </div>
+                        }
                     </div>
                     <div className="placeOrder">
-                        <buton className='placeOrderButton'>Place Order</buton>
+                        <button disabled={cart.length === 0} onClick={handleOrderplaced} className='placeOrderButton'>Place Order</button>
                     </div>
                 </motion.div>
                 <motion.div
@@ -73,7 +87,22 @@ const CartPage = () => {
                     <hr class="rightSideLine" />
                     <span className='totalSave'>You will save ₹{(total / 10)} on this order</span>
                 </motion.div>
-            </div>
+
+            </div>}
+            {orderPlaced && <motion.div
+                initial={{ y: 400 }}
+                animate={{ y: 0 }}
+                className="orderPlacedDiv">
+                <div className='orderplacedText'>
+                    <img src={require('../../images/orderplaced.jpg')} />
+                    <h1>Thankyou For Shopping from EcoCart!</h1>
+                </div>
+                {/* EXPLORE ALL PRODUCTS */}
+                <div className="explore">
+                    <Link to={'/category/all'} ><button class="button-56" role="button">Explore All Products</button></Link>
+                </div>
+            </motion.div>}
+
         </>
     )
 }

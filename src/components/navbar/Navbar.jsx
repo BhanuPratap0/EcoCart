@@ -43,10 +43,6 @@ const Navbar = () => {
                 <span>Cart</span>
               </Link>
             </div>
-            <div className="iconItem">
-              <PersonIcon />
-              <span>Login</span>
-            </div>
 
           </div>
         </div>

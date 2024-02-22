@@ -6,7 +6,7 @@ import FlashOnIcon from '@mui/icons-material/FlashOn';
 import ArrowCircleRightIcon from '@mui/icons-material/ArrowCircleRight';
 import { categoryList, productsList } from '../../data.js';
 import Carousel from 'react-multi-carousel';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import cartContext from '../../context/cartContext.js';
 import { allProductList } from '../../sampledata';
 
@@ -143,7 +143,7 @@ const ProductDetail = () => {
                     >
                         {similarProducts.map((item) => (
                             <div className="popularItem">
-                                <img src={item.images[0]} />
+                                <Link to={`/productDetail/${item.title}`} ><img src={item.images[0]} /></Link>
                                 <span className='popularItemName'>{item.title}</span>
                                 <span className='popularItemPrice'>₹{item.price}</span>
                             </div>

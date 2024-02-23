@@ -79,12 +79,6 @@ const Category = () => {
                         <option value="2">2★ & above</option>
                         <option value="1">1★ & above</option>
                     </select>
-                    <select ref={brandRef} name="brand" id="price">
-                        <option value="">Brands</option>
-                        <option value="saab">₹1000-4000</option>
-                        <option value="opel">₹4000-8000</option>
-                        <option value="audi">₹8000-10000</option>
-                    </select>
                     <button className='filterButton' type='submit'>Filter</button>
                 </form>
             </div>

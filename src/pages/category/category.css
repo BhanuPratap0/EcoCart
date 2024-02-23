@@ -53,6 +53,7 @@
     border-bottom: 0.5px solid gray;
     background-color: white;
     box-shadow: 3px 2px 0px black;
+    color: black;
 }
 .filterButton:hover{
     box-shadow: none;
